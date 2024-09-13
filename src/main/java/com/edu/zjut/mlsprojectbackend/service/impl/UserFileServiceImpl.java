@@ -53,7 +53,7 @@ public class UserFileServiceImpl extends ServiceImpl<UserFileMapper, UserFile> i
 			assert originalFilename != null;
 			String filename = originalFilename.replace("-", "_");
 			//文件上传路径
-			String filePath = "E:\\软件工程\\课设\\mls-project\\MLSproject-backend\\mlsproject-frontend\\src\\assets\\pdfFiles\\" + filename;
+			String filePath = "F:\\" + filename;
 			file.transferTo(new File(filePath));
 			UserFile userFile = new UserFile(null, filename, filePath, file.getSize(), 0, date, userName,"公共", "未审核",0, 0);
 			if (!this.save(userFile)) return "上传失败";

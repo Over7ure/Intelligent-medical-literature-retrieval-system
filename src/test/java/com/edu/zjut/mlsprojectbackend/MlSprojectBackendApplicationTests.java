@@ -6,7 +6,6 @@ import com.edu.zjut.mlsprojectbackend.service.FileIndexService;
 import com.edu.zjut.mlsprojectbackend.service.UserFileService;
 import com.edu.zjut.mlsprojectbackend.utils.BaiduOCRUtils;
 import com.edu.zjut.mlsprojectbackend.utils.PDFUtils;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +22,10 @@ class MlSprojectBackendApplicationTests {
 
 	@Autowired
 	UserFileService service;
+	@Autowired
+	PDFUtils utils;
+	@Autowired
+	ElasticsearchTemplate template;
 	@Autowired
 	private FileIndexService fileIndexService;
 
@@ -63,25 +66,24 @@ class MlSprojectBackendApplicationTests {
 		List<UserFile> files = service.getFilesByName(filename);
 		files.forEach(System.out::println);
 	}
+
 	@Test
 	public void test() {
 		fileIndexService.initIndex();
 
-		List<FileIndex> list=fileIndexService.matchingQuery("查询");
-		for(FileIndex file:list){
+		List<FileIndex> list = fileIndexService.matchingQuery("查询");
+		for (FileIndex file : list) {
 			System.out.println(file);
 		}
 	}
-	@Autowired
-	PDFUtils utils;
-	@Autowired
-	ElasticsearchTemplate template;
+
 	@Test
 	public void PDFtest() throws Exception {
 		List<BufferedImage> images = utils.extractImagesFromPDF("E:\\软件工程\\课设\\mls-project\\MLSproject-backend\\mlsproject-frontend\\src\\assets\\pdfFiles\\COVID_19急性期后的远期肾脏转归：从急性肾损伤到慢性肾脏病.pdf");
 		String text = BaiduOCRUtils.OCRImages(images);
 		System.out.println(text);
 	}
+
 	@Test
 	public void fileTest() throws Exception {
 		UserFile file = new UserFile();

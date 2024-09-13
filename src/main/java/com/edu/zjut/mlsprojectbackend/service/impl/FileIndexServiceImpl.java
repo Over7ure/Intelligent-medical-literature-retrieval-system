@@ -98,9 +98,9 @@ public class FileIndexServiceImpl implements FileIndexService {
             if(!contentHighlight.isEmpty()){
                 fileIndex.setContent(contentHighlight.get(0));
             }
-			if(fileIndex.getState().equals("公共") && fileIndex.getChecked().equals("已审核")){
-				fileIndexList.add(fileIndex);
-			}
+//			if(fileIndex.getState().equals("公共") && fileIndex.getChecked().equals("已审核")){
+//				fileIndexList.add(fileIndex);
+//			}
 		}
 		return fileIndexList;
 	}
